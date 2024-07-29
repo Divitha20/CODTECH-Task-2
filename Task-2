@@ -1,0 +1,57 @@
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set seaborn style
+sns.set(style="whitegrid")
+
+# Load the customer data (provide the correct path to your CSV file)
+os.chdir("C:\\codtech")
+customer_data = pd.read_csv('fam.csv')
+
+# Inspect the data
+print(customer_data.head())
+
+#Age distribution
+plt.figure(figsize=(10, 6))
+sns.histplot(customer_data['Age'], bins=10, kde=True)
+plt.title('Age Distribution')
+plt.xlabel('Age')
+plt.ylabel('Number of Customers')
+plt.show()
+
+#Gender Breakdown
+plt.figure(figsize=(8, 6))
+gender_counts = customer_data['Gender'].value_counts()
+sns.barplot(x=gender_counts.index, y=gender_counts.values)
+plt.title('Gender Breakdown')
+plt.xlabel('Gender')
+plt.ylabel('Number of Customers')
+plt.show()
+
+#location distribution
+plt.figure(figsize=(12, 8))
+location_counts = customer_data['Location'].value_counts()
+sns.barplot(x=location_counts.index, y=location_counts.values)
+plt.title('Location Distribution')
+plt.xlabel('Location')
+plt.ylabel('Number of Customers')
+plt.xticks(rotation=45)
+plt.show()
+
+#total purchases
+plt.figure(figsize=(10, 6))
+sns.histplot(customer_data['TotalPurchases'], bins=10, kde=True)
+plt.title('Total Purchases Distribution')
+plt.xlabel('Total Purchases')
+plt.ylabel('Number of Customers')
+plt.show()
+
+#puchase by age
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=customer_data, x='Age', y='TotalPurchases', hue='Gender')
+plt.title('Purchases by Age')
+plt.xlabel('Age')
+plt.ylabel('Total Purchases')
+plt.show()
